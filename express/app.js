@@ -3,23 +3,13 @@ const express = require("express");
 const app = express();
 
 app.use("/", (req, res, next) => {
-  console.log("come i first middleware", req.url, req.method);
+  console.log(`${req.method} ${req.url}`);
+  res.send("Hello World");
   next();
 });
-
 app.use("/user", (req, res, next) => {
-  console.log("come in second middle ware", req.url, req.method);
-  next();
+  res.send("User route");
 });
-
-app.get("/", (req, res) => {
-  res.send("<h1>hello</h1>");
-});
-app.get("/user", (req, res) => {
-  res.send("<h1>hello from user route</h1>");
-});
-
-const port = 3000;
-app.listen(3000, () => {
-  console.log("server is listening a port 3000");
+app.listen(4000, () => {
+  console.log(`Server is running on http://localhost:${4000}`);
 });
