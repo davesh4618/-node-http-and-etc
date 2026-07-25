@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const userrouter = require("./routes/userroutes");
 const hostrouter = require("./routes/hostrouter");
 const path = require("path");
+const rootpath = require("./utility/path_utils");
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
@@ -15,7 +17,7 @@ app.use(express.urlencoded());
 app.use("/host", hostrouter);
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "views", "404.html"));
+  res.sendFile(path.join(rootpath, "views", "404.html"));
 });
 
 app.listen(port, () => {
