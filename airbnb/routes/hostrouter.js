@@ -6,9 +6,12 @@ const path = require("path");
 hostrouter.get("/add-home", (req, res, next) => {
   res.sendFile(path.join(rootpath, "views", "addhome.html"));
 });
+
+const houses = [];
 hostrouter.post("/add-home", (req, res, next) => {
   res.sendFile(path.join(rootpath, "views", "homeadded.html"));
-  console.log(req.body);
+  houses.push({ housename: req.body.housename });
+  console.log(req.body.housename);
 });
-
-module.exports = hostrouter;
+exports.hostrouter = hostrouter;
+exports.houses = houses
