@@ -5,7 +5,7 @@ const { houses } = require("./hostrouter");
 
 userrouter.get("/", (req, res, next) => {
   console.log(houses);
-  res.sendFile(path.join(__dirname, "../", "views", "home.html"));
+  res.render("home.ejs", { houses: houses });
 });
 
 module.exports = userrouter;

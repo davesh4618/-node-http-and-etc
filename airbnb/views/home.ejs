@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header class="border-b-2 border-blue-600 bg-blue-400 p-4">
+      <h1 class="underline text-red-500 text-4xl font-bold text-center">Welcome to Airbnb</h1>
+    </header>
+    <div class="flex justify-center my-6">
+      <a class="bg-sky-500 text-white font-semibold px-6 py-2 rounded shadow hover:bg-sky-600 transition-colors" href="/host/add-home">Add Home</a>
+    </div>
+    <h5 class="text-red-500 text-3xl m-5 font-semibold text-center">Registered Homes</h5>
+    <ul class="max-w-2xl mx-auto bg-white shadow rounded p-6 space-y-3">
+      <% houses.forEach(home => { %>
+        <li class="text-blue-800 text-lg border-b border-gray-200 pb-2 last:border-b-0"><%= home.housename %></li>
+      <% }) %>
+    </ul>
+</ul>
+  </body>
+</html>

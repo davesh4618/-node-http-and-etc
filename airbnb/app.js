@@ -3,10 +3,12 @@ const app = express();
 const port = 4000;
 const bodyParser = require("body-parser");
 const userrouter = require("./routes/userroutes");
-const {hostrouter} = require("./routes/hostrouter");
+const { hostrouter } = require("./routes/hostrouter");
 const path = require("path");
 const rootpath = require("./utility/path_utils");
 
+app.set("view engine", "ejs");
+app.set("views", "views");
 app.use(express.static(path.join(rootpath, "public")));
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
