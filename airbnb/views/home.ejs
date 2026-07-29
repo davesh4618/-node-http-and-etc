@@ -9,17 +9,19 @@
 
   <body>
     <header class="border-b-2 border-blue-600 bg-blue-400 p-4">
-      <h1 class="underline text-red-500 text-4xl font-bold text-center">Welcome to Airbnb</h1>
+      <h1 class="underline text-red-500 text-4xl font-bold text-center f">Welcome to Airbnb</h1>
     </header>
     <div class="flex justify-center my-6">
       <a class="bg-sky-500 text-white font-semibold px-6 py-2 rounded shadow hover:bg-sky-600 transition-colors" href="/host/add-home">Add Home</a>
     </div>
     <h5 class="text-red-500 text-3xl m-5 font-semibold text-center">Registered Homes</h5>
-    <ul class="max-w-2xl mx-auto bg-white shadow rounded p-6 space-y-3">
-      <% houses.forEach(home => { %>
-        <li class="text-blue-800 text-lg border-b border-gray-200 pb-2 last:border-b-0"><%= home.housename %></li>
+    <div class="flex justify-center items-center">
+      <ul class="max-w-4xl bg-pink-500 shadow-lg  m-5 rounded-lg p-6 space-y-3 flex flex-col items-center justify-center border-2 border-gray-200">
+      <% houseData.forEach(home => { %>
+        <li class="shadow-lg bg-transparent border-2 border-gray-200   m-2 rounded-lg p-6 space-y-3">
+          <strong class="text-blue-800 text-lg"><%= home.housename %></strong> <br>price: $<%= home.price %> <br> location: <%= home.location %> <br> rating: <%= home.rating %>★
+        </li>
       <% }) %>
-    </ul>
-</ul>
+    </ul></div>
   </body>
 </html>
