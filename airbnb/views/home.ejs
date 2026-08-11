@@ -21,7 +21,11 @@
         <li class="shadow-lg bg-transparent border-2 border-gray-200   m-2 rounded-lg p-6 space-y-3">
           <strong class="text-blue-800 text-lg"><%= home.housename %></strong> <br>price: $<%= home.price %> <br> location: <%= home.location %> <br> rating: <%= home.rating %>★
         </li>
+        <a class="bg-green-400 text-green-400" href="/home/<%= home.id %>">detail</a>
       <% }) %>
-    </ul></div>
+    </ul>
+    
+  </div>
+
   </body>
 </html>
