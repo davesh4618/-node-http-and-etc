@@ -1,9 +1,7 @@
 const express = require("express");
 const userrouter = express.Router();
-const { houseData } = require("../utility/housestore");
 
-userrouter.get("/", (req, res, next) => {
-  res.render("home", { houseData });
-});
+const { gethomes } = require("../controler/home");
+userrouter.get("/", gethomes);
 
 module.exports = userrouter;
