@@ -29,3 +29,7 @@ exports.homedetail = (req, res, next) => {
     });
   }
 };
+
+exports.getedithome = (req, res, next) => {
+  res.render("edit-home", { pagetittle: "add home page" });
+};
