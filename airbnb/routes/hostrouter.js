@@ -7,5 +7,9 @@ const { adddata } = require("../controler/home");
 hostrouter.get("/add-home", addhome);
 
 hostrouter.post("/add-home", adddata);
+hostrouter.get("/edit-homes/:id", (req, res, next) => { 
+  
+})
+
 
 exports.hostrouter = hostrouter;

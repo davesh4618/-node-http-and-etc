@@ -21,7 +21,9 @@
         <li class="shadow-lg bg-transparent border-2 border-gray-200   m-2 rounded-lg p-6 space-y-3">
           <strong class="text-blue-800 text-lg"><%= home.housename %></strong> <br>price: $<%= home.price %> <br> location: <%= home.location %> <br> rating: <%= home.rating %>★
         </li>
-        <a class="bg-green-400 text-green-400" href="/home/<%= home.id %>">detail</a>
+        <div><a class="bg-green-400 text-white font-semibold px-4 py-2 rounded shadow inline-flex hover:bg-green-500 transition-colors"
+         href="/home/<%= home.id %>">detail</a>
+         <a class="bg-green-400 text-white font-semibold px-4 py-2 rounded shadow hover:bg-green-500 transition-colors" href="/edit-homes/<%=home.id%>?editing=true">edits</a></div>
       <% }) %>
     </ul>
     

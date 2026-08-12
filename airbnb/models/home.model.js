@@ -12,6 +12,7 @@ module.exports = class Home {
       (this.rating = rating));
   }
   save() {
+    this.id = Math.random().toString();
     houseData.push(this);
     const pathfordata = path.join(rootdir, "data", "housedata.json");
     fs.writeFile(pathfordata, JSON.stringify(houseData), (err) => {
