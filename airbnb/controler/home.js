@@ -31,5 +31,26 @@ exports.homedetail = (req, res, next) => {
 };
 
 exports.getedithome = (req, res, next) => {
-  res.render("edit-home", { pagetittle: "add home page" });
+  const id = req.params.id;
+  Home.fetchall((houseData) => {
+    const home = houseData.find((h) => h.id === id);
+    if (!home) {
+      return res.redirect("/");
+    }
+    res.render("edit-home", { pagetittle: "edit home page", home });
+  });
 };
+
+exports.postedithome = (req, res, next) => {
+  const id = req.params.id;
+  const { housename, price, location, rating } = req.body;
+  const home = new Home(housename, price, location, rating, id);
+  home.save();
+  res.redirect("/");
+};
+
+exports.deletehome = (req, res, next) => {
+  const id = req.params.id; 
+  Home.deletebyid(id);
+  res.redirect("/");
+}
