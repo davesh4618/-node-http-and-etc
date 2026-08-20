@@ -14,26 +14,26 @@ exports.adddata = (req, res, next) => {
 };
 
 exports.gethomes = (req, res, next) => {
-  Home.fetchall((houseData) => {
-    res.render("home", { houseData });
+  Home.fetchall().then(([rows]) => {
+    res.render("home", { houseData: rows });
   });
 };
 exports.homedetail = (req, res, next) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (!id) {
     res.render("404");
   } else {
-    Home.fetchall((houseData) => {
-      const home = houseData.find((home) => home.id === id);
+    Home.fetchall().then(([rows]) => {
+      const home = rows.find((home) => home.id === id);
       res.render("homedetail", { home });
     });
   }
 };
 
 exports.getedithome = (req, res, next) => {
-  const id = req.params.id;
-  Home.fetchall((houseData) => {
-    const home = houseData.find((h) => h.id === id);
+  const id = Number(req.params.id);
+  Home.fetchall().then(([rows]) => {
+    const home = rows.find((h) => h.id === id);
     if (!home) {
       return res.redirect("/");
     }
@@ -50,7 +50,7 @@ exports.postedithome = (req, res, next) => {
 };
 
 exports.deletehome = (req, res, next) => {
-  const id = req.params.id; 
+  const id = req.params.id;
   Home.deletebyid(id);
   res.redirect("/");
-}
+};
