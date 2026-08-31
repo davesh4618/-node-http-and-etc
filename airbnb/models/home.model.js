@@ -9,7 +9,9 @@ module.exports = class Home {
     if (id) this.id = id;
   }
 
-  save() {}
+  save() {
+    
+  }
 
   static fetchall() {
     return pool.execute("SELECT * FROM homes");
