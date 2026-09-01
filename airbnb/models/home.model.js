@@ -10,12 +10,26 @@ module.exports = class Home {
   }
 
   save() {
-    
+    if (this.id) {
+      // Editing an existing home
+      return pool.execute(
+        "UPDATE homes SET housename = ?, price = ?, location = ?, rating = ? WHERE id = ?",
+        [this.housename, this.price, this.location, this.rating, this.id],
+      );
+    } else {
+      // Adding a new home — let MySQL auto-generate the id
+      return pool.execute(
+        "INSERT INTO homes (housename, price, location, rating) VALUES (?, ?, ?, ?)",
+        [this.housename, this.price, this.location, this.rating],
+      );
+    }
   }
 
   static fetchall() {
     return pool.execute("SELECT * FROM homes");
   }
 
-  static deletebyid(id) {}
+  static deletebyid(id) {
+    return pool.execute("DELETE FROM homes WHERE id = ?", [id]);
+  }
 };
