@@ -1,32 +1,35 @@
 const express = require("express");
 const app = express();
 const port = 4000;
-const bodyParser = require("body-parser");
-const userrouter = require("./routes/userroutes");
-const { hostrouter } = require("./routes/hostrouter");
 const path = require("path");
 const rootpath = require("./utility/path_utils");
+const userrouter = require("./routes/userroutes");
+const { hostrouter } = require("./routes/hostrouter");
+
 const { pagenotfound } = require("./controler/errors");
-const mongoconnect = require("./utility/databas.utils");
- 
+
+const { default: mongoose } = require("mongoose");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(rootpath, "public")));
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
-
 app.use(userrouter);
 app.use(express.urlencoded());
 app.use("/host", hostrouter);
 
 app.use(pagenotfound);
 
-mongoconnect((client) => {
-  console.log("Connected to MongoDB ", client);
-  app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+const dbpath =
+  "mongodb+srv://devesh:@cluster0.7kgephf.mongodb.net/airbnb?appName=Cluster0";
+
+mongoose
+  .connect(dbpath)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Failed to connect to MongoDB", err);
   });
-});
