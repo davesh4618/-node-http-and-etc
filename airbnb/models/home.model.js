@@ -1,20 +1,23 @@
-module.exports = class Home {
-  constructor(housename, price, location, rating, id) {
-    this.housename = housename;
-    this.price = price;
-    this.location = location;
-    this.rating = rating;
-    if (id) this.id = id;
-  }
+const { ObjectId } = require("mongodb");
 
-  save() {
-   
-  }
+//  this.housename = housename;
+//     this.price = price;
+//     this.location = location;
+//     this.rating = rating;
+//     if (_id) this._id = _id;
+//    save()
+//    find()
+//    deletebyid(id)
 
-  static fetchall() {
-  }
+const mongoose = require("mongoose");
+const homeschema = new mongoose.Schema(
+  {
+    housename: { type: String, required: true },
+    price: { type: Number, required: true },
+    location: { type: String, required: true },
+    rating: { type: Number, min: 0, max: 5 },
+  },
+  { timestamps: true },
+);
 
-  static deletebyid(id) {
-   
-  }
-};
+module.exports = mongoose.model("Home", homeschema);

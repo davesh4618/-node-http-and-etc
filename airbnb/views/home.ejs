@@ -22,10 +22,10 @@
           <strong class="text-blue-800 text-lg"><%= home.housename %></strong> <br>price: $<%= home.price %> <br> location: <%= home.location %> <br> rating: <%= home.rating %>★
         </li>
         <div><a class="bg-green-400 text-white font-semibold px-4 py-2 rounded shadow inline-flex hover:bg-green-500 transition-colors"
-         href="/home/<%= home.id %>">detail</a>
+         href="/home/<%= home._id %>">detail</a>
          <a class="bg-green-400 text-white font-semibold px-4 py-2 rounded shadow hover:bg-green-500 transition-colors" 
-         href="/host/edit-homes/<%=home.id%>?editing=true">edits</a>
-        <form action="/host/delete-home/<%=home.id%>" method="POST" class="inline-flex">
+         href="/host/edit-homes/<%=home._id%>?editing=true">edits</a>
+        <form action="/host/delete-home/<%=home._id%>" method="POST" class="inline-flex">
           <button class="bg-red-500 text-white font-semibold px-4 py-2 rounded shadow hover:bg-red-600 transition-colors" type="submit">delete</button>
         </form>
         </div>

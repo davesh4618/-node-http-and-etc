@@ -11,7 +11,7 @@
       <%= pagetittle %>
     </h1>
     <form
-      action="<%= typeof home !== 'undefined' ? '/host/edit-homes/' + home.id : '/host/add-home' %>"
+      action="<%= typeof home !== 'undefined' ? '/host/edit-homes/' + home._id : '/host/add-home' %>"
       method="POST"
       class="max-w-md mx-auto shadow-lg p-6 rounded-lg space-y-4 border-4 border-yellow-400 bg-gradient-to-br from-pink-400 via-yellow-200 to-blue-300"
     >
@@ -20,7 +20,7 @@
           >Home Name:</label
         >
         <input
-          value="<%= typeof home !== 'undefined' ? home.id : '' %>"
+          value="<%= typeof home !== 'undefined' ? home._id : '' %>"
           type="hidden"
           name="id"
         />
