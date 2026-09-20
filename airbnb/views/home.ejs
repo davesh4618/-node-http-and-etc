@@ -12,8 +12,12 @@
       <h1 class="underline text-red-500 text-4xl font-bold text-center f">Welcome to Airbnb</h1>
     </header>
     <div class="flex justify-center gap-3 my-6">
-      <a class="bg-sky-500 text-white font-semibold px-6 py-2  m-3 rounded shadow hover:bg-sky-600 transition-colors" href="/host/add-home">Add Home</a>
-      <a class="bg-sky-500 text-white font-semibold px-6  py-2  rounded shadow hover:bg-sky-600 transition-colors" href="/login">Login</a>
+      <% if (!isloggedin) { %>
+        <a class="bg-sky-500 text-white font-semibold px-6 py-2  m-3 rounded shadow hover:bg-sky-600 transition-colors" href="/host/add-home">Add Home</a>
+      <%}%>
+        
+        <a class="bg-sky-500 text-white font-semibold px-6  py-2  rounded shadow hover:bg-sky-600 transition-colors" href="/login">Login</a>
+    
     </div>
     <h5 class="text-red-500 text-3xl m-5 font-semibold text-center">Registered Homes</h5>
     <div class="flex justify-center items-center">
