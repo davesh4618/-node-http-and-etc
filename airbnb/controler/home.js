@@ -3,7 +3,7 @@ const rootpath = require("../utility/path_utils");
 const Home = require("../models/home.model");
 
 exports.addhome = (req, res, next) => {
-  res.render("edit-home", { pagetittle: "add home page" });
+  res.render("edit-home", { pagetittle: "add home page"  , isloggedin: req.isloggedin });
 };
 exports.adddata = (req, res, next) => {
   const { housename, price, location, rating } = req.body;
@@ -17,7 +17,7 @@ exports.adddata = (req, res, next) => {
 
 exports.gethomes = (req, res, next) => {
   Home.find().then((rows) => {
-    res.render("home", { houseData: rows });
+    res.render("home", { houseData: rows , pagetittle: "Home page" , isloggedin: req.isloggedin });
   });
 };
 exports.homedetail = (req, res, next) => {
@@ -27,10 +27,10 @@ exports.homedetail = (req, res, next) => {
     const home = rows.find((home) => home._id.toString() === id);
 
     if (!home) {
-      return res.render("404");
+      return res.render("404", { pagetittle: "Page Not Found" , isloggedin: req.isloggedin });
     }
 
-    res.render("homedetail", { home });
+    res.render("homedetail", { home , pagetittle: "Home Detail" , isloggedin: req.isloggedin });
   });
 };
 
@@ -41,7 +41,7 @@ exports.getedithome = (req, res, next) => {
     if (!home) {
       return res.redirect("/");
     }
-    res.render("edit-home", { pagetittle: "edit home page", home });
+    res.render("edit-home", { pagetittle: "edit home page", home , isloggedin: req.isloggedin });
   });
 };
 

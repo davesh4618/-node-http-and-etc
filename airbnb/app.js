@@ -21,7 +21,7 @@ app.use(authrouter);
 app.use(pagenotfound);
 
 const dbpath =
-  "mongodb+srv://devesh:*******@cluster0.7kgephf.mongodb.net/airbnb?appName=Cluster0";
+  "mongodb+srv://devesh:devesh123@cluster0.7kgephf.mongodb.net/airbnb?appName=Cluster0";
 
 mongoose
   .connect(dbpath)
