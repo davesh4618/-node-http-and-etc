@@ -3,6 +3,12 @@ exports.authcontroler = (req, res, next) => {
 };
 
 exports.authpostcontroler = (req, res, next) => {
-  req.isloggedin = true;
+ 
+  res.cookie("isloggedin", true);
+  res.redirect("/");
+};
+exports.logoutconstroler = (req, res, next) => {
+  res.clearCookie("isloggedin");
+  console.log("cookie cleared");
   res.redirect("/");
 };
