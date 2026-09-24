@@ -3,8 +3,8 @@ exports.authcontroler = (req, res, next) => {
 };
 
 exports.authpostcontroler = (req, res, next) => {
- 
-  res.cookie("isloggedin", true);
+  req.session.isloggedin = true;
+  // res.cookie("isloggedin", true);
   res.redirect("/");
 };
 exports.logoutconstroler = (req, res, next) => {
