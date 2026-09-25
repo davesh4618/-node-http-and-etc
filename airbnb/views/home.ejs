@@ -18,7 +18,9 @@
            <button class="bg-sky-500 text-white font-semibold px-6 py-2  m-3 rounded shadow hover:bg-sky-600 transition-colors" type="submit">Logout</button>
          </form>
       <%} else {%>
-        <a class="bg-sky-500 text-white font-semibold px-6  py-2  rounded shadow hover:bg-sky-600 transition-colors" href="/login">Login</a>
+        <a class="bg-sky-500 text-white font-semibold px-6  py-2  rounded shadow hover:bg-sky-600 transition-colors" href="/login">Login</a><form action="/signup" method="GET">
+           <button class="bg-sky-500 text-white font-semibold px-6 py-2  m-3 rounded shadow hover:bg-sky-600 transition-colors" type="submit">Sign up</button>
+         </form>
     <%}%>
     </div>
     <h5 class="text-red-500 text-3xl m-5 font-semibold text-center">Registered Homes</h5>
