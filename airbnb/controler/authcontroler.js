@@ -12,3 +12,6 @@ exports.logoutconstroler = (req, res, next) => {
   console.log("cookie cleared");
   res.redirect("/");
 };
+exports.signupcontroler = (req, res, next) => {
+  res.render("auth/signup", { pagetittle: "Signup", isloggedin: false });
+};
