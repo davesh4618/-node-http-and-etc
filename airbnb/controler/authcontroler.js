@@ -1,4 +1,5 @@
-const { check, validationResult } = require("express-validator")
+const { check, validationResult } = require("express-validator");
+const User = require("../models/user.model.js");
 exports.authcontroler = (req, res, next) => {
   res.render("auth/login", { pagetittle: "Login", isloggedin: false });
 };
@@ -18,10 +19,19 @@ exports.logoutconstroler = (req, res, next) => {
   res.redirect("/");
 };
 exports.signupcontroler = (req, res, next) => {
-  res.render("auth/signup", { pagetittle: "Signup", 
-    errors :[],
-    output : { firstName: "", lastname: "", email: "", password: "", confirmPassword: "" }
-    ,isloggedin: false });
+  res.render("auth/signup", {
+    pagetittle: "Signup",
+    errors: [],
+    output: {
+      firstName: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      usertype: "",
+    },
+    isloggedin: false,
+  });
 };
 exports.signuppostcontroler = [
   check("firstName").notEmpty().withMessage("First name is required"),
@@ -34,17 +44,41 @@ exports.signuppostcontroler = [
     .custom((value, { req }) => value === req.body.password)
     .withMessage("Passwords do not match"),
   (req, res, next) => {
-    const { firstName, lastname, email, password, confirmPassword } = req.body;
+    const { firstName, lastname, email, password, confirmPassword, usertype } =
+      req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).render("auth/signup", {
         pagetittle: "Signup",
         isloggedin: false,
         errors: errors.array().map((err) => err.msg),
-        output: { firstName, lastname, email, password, confirmPassword },
+        output: {
+          firstName,
+          lastname,
+          email,
+          password,
+          confirmPassword,
+          usertype,
+        },
       });
     }
+    const user = new User({
+      firstname: firstName,
+      lastname: lastname,
+      email: email,
+      password: password,
+      usertype: usertype,
+    });
+    user
+      .save()
+      .then(() => {
+        console.log("User saved successfully");
+        res.redirect("/login");
+      })
 
-   res.redirect("/logout")
+      .catch((err) => {
+        console.error("Error saving user:", err);
+        res.status(500).send("Internal Server Error");
+      });
   },
 ];

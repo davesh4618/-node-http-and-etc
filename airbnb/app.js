@@ -23,15 +23,16 @@ const store = new mongodbstore({
 
 app.use(express.static(path.join(rootpath, "public")));
 app.use(express.urlencoded({ extended: true }));
-app.use(session({
-  secret: "jhumki",
-  resave: false,
-  saveUninitialized: false,
-  store: store
-}));
+app.use(
+  session({
+    secret: "jhumki",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  }),
+);
 
 app.use((req, res, next) => {
-  
   req.isloggedin = req.session.isloggedin;
   next();
 });
@@ -47,8 +48,6 @@ app.use("/host", (req, res, next) => {
 app.use("/host", hostrouter);
 app.use(authrouter);
 app.use(pagenotfound);
-
-
 
 mongoose
   .connect(dbpath)
