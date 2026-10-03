@@ -1,5 +1,6 @@
 const { check, validationResult } = require("express-validator");
 const User = require("../models/user.model.js");
+const bcrypt = require("bcryptjs");
 exports.authcontroler = (req, res, next) => {
   res.render("auth/login", { pagetittle: "Login", isloggedin: false });
 };
@@ -62,23 +63,34 @@ exports.signuppostcontroler = [
         },
       });
     }
-    const user = new User({
-      firstname: firstName,
-      lastname: lastname,
-      email: email,
-      password: password,
-      usertype: usertype,
-    });
-    user
-      .save()
+
+    bcrypt
+      .hash(password, 10)
+
+      .then((hashedPassword) => {
+        console.log("Original password:", password);
+        console.log("Hashed password:", hashedPassword);
+        const user = new User({
+          firstname: firstName,
+          lastname: lastname,
+          email: email,
+          password: hashedPassword,
+          usertype: usertype,
+        });
+        return user.save();
+      })
       .then(() => {
         console.log("User saved successfully");
         res.redirect("/login");
       })
-
       .catch((err) => {
         console.error("Error saving user:", err);
-        res.status(500).send("Internal Server Error");
+        res.status(500).render("auth/signup", {
+          pagetittle: "Signup",
+          isloggedin: false,
+          errors: ["Internal Server Error"],
+          output: { firstName, lastname, email, usertype },
+        });
       });
   },
 ];
